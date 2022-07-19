@@ -1,17 +1,17 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback } from 'react'
 
-import { randomTetromino } from "/src/business/Tetrominoes";
+import { randomTetromino } from '../business/Tetrominoes'
 
-const buildPlayer = (previous) => {
-  let tetrominoes;
+const buildPlayer = previous => {
+  let tetrominoes
 
   if (previous) {
-    tetrominoes = [...previous.tetrominoes];
-    tetrominoes.unshift(randomTetromino());
+    tetrominoes = [...previous.tetrominoes]
+    tetrominoes.unshift(randomTetromino())
   } else {
     tetrominoes = Array(5)
       .fill(0)
-      .map((_) => randomTetromino());
+      .map(_ => randomTetromino())
   }
 
   return {
@@ -19,16 +19,16 @@ const buildPlayer = (previous) => {
     isFastDropping: false,
     position: { row: 0, column: 4 },
     tetrominoes,
-    tetromino: tetrominoes.pop()
-  };
-};
+    tetromino: tetrominoes.pop(),
+  }
+}
 
 export const usePlayer = () => {
-  const [player, setPlayer] = useState(buildPlayer());
+  const [player, setPlayer] = useState(buildPlayer())
 
   const resetPlayer = useCallback(() => {
-    setPlayer((prev) => buildPlayer(prev));
-  }, []);
+    setPlayer(prev => buildPlayer(prev))
+  }, [])
 
-  return [player, setPlayer, resetPlayer];
-};
+  return [player, setPlayer, resetPlayer]
+}

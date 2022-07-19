@@ -1,26 +1,26 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react'
 
-import { buildBoard, nextBoard } from "/src/business/Board";
+import { buildBoard, nextBoard } from '../business/Board'
 
 export const useBoard = ({
   rows,
   columns,
   player,
   resetPlayer,
-  addLinesCleared
+  addLinesCleared,
 }) => {
-  const [board, setBoard] = useState(buildBoard({ rows, columns }));
+  const [board, setBoard] = useState(buildBoard({ rows, columns }))
 
   useEffect(() => {
-    setBoard((previousBoard) =>
+    setBoard(previousBoard =>
       nextBoard({
         board: previousBoard,
         player,
         resetPlayer,
-        addLinesCleared
-      })
-    );
-  }, [player, resetPlayer, addLinesCleared]);
+        addLinesCleared,
+      }),
+    )
+  }, [player, resetPlayer, addLinesCleared])
 
-  return [board];
-};
+  return [board]
+}

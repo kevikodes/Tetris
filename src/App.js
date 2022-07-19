@@ -1,11 +1,11 @@
-import "./styles.css";
+import './styles.css'
 
-import Game from "/src/components/Game";
+import Game from './components/Game'
 
 export default function App() {
   return (
-    <div className="App">
+    <div className='App'>
       <Game rows={20} columns={10} />
     </div>
-  );
+  )
 }

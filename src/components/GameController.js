@@ -1,50 +1,50 @@
-import "./GameController.css";
+import './GameController.css'
 
-import { Action, actionForKey, actionIsDrop } from "/src/business/Input";
-import { playerController } from "/src/business/PlayerController";
+import { Action, actionForKey, actionIsDrop } from '../business/Input'
+import { playerController } from '../business/PlayerController'
 
-import { useDropTime } from "/src/hooks/useDropTime";
-import { useInterval } from "/src/hooks/useInterval";
+import { useDropTime } from '../hooks/useDropTime'
+import { useInterval } from '../hooks/useInterval'
 
 const GameController = ({
   board,
   gameStats,
   player,
   setGameOver,
-  setPlayer
+  setPlayer,
 }) => {
   const [dropTime, pauseDropTime, resumeDropTime] = useDropTime({
-    gameStats
-  });
+    gameStats,
+  })
 
   useInterval(() => {
-    handleInput({ action: Action.SlowDrop });
-  }, dropTime);
+    handleInput({ action: Action.SlowDrop })
+  }, dropTime)
 
   const onKeyUp = ({ code }) => {
-    const action = actionForKey(code);
-    if (actionIsDrop(action)) resumeDropTime();
-  };
+    const action = actionForKey(code)
+    if (actionIsDrop(action)) resumeDropTime()
+  }
 
   const onKeyDown = ({ code }) => {
-    const action = actionForKey(code);
+    const action = actionForKey(code)
 
     if (action === Action.Pause) {
       if (dropTime) {
-        pauseDropTime();
+        pauseDropTime()
       } else {
-        resumeDropTime();
+        resumeDropTime()
       }
     } else if (action === Action.Quit) {
-      setGameOver(true);
+      setGameOver(true)
     } else {
-      if (actionIsDrop(action)) pauseDropTime();
+      if (actionIsDrop(action)) pauseDropTime()
       if (!dropTime) {
-        return;
+        return
       }
-      handleInput({ action });
+      handleInput({ action })
     }
-  };
+  }
 
   const handleInput = ({ action }) => {
     playerController({
@@ -52,19 +52,19 @@ const GameController = ({
       board,
       player,
       setPlayer,
-      setGameOver
-    });
-  };
+      setGameOver,
+    })
+  }
 
   return (
     <input
-      className="GameController"
-      type="text"
+      className='GameController'
+      type='text'
       onKeyDown={onKeyDown}
       onKeyUp={onKeyUp}
       autoFocus
     />
-  );
-};
+  )
+}
 
-export default GameController;
+export default GameController
